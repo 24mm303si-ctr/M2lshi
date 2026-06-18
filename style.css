@@ -1,0 +1,695 @@
+/* Variables pour respecter les couleurs du logo */
+:root {
+    --logo-green: #0A5C10; /* Le vert profond du logo */
+    --logo-orange: #F29F05; /* Le jaune-orange du logo */
+    --text-dark: #333333;
+    --bg-light: #f9f9f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* === NAVIGATION FIXE === */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 50px; /* Ajuste la taille selon ton image */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--logo-green);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--logo-green);
+}
+
+.btn-contact-nav {
+    background-color: var(--logo-green);
+    color: #ffffff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-contact-nav:hover {
+    background-color: #07470b;
+}
+
+/* === SECTION HEROS === */
+.hero {
+    margin-top: 70px; /* Pour compenser la barre fixe */
+    min-height: 90vh;
+    /* Le dégradé part du bas (vert opacity 90%) vers le haut (transparent) + ton image de fond */
+    background: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.1) 100%), url('images/imde1.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-filled {
+    background-color: var(--logo-green);
+    color: white;
+}
+
+.btn-filled:hover {
+    background-color:var(--logo-orange);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn-outline:hover {
+    background-color: #ffffff;
+    color: var(--logo-green);
+}
+
+/* === BIENVENUE === */
+.welcome-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.welcome-section h2 {
+    margin-bottom: 40px;
+    color: var(--logo-green);
+}
+
+.welcome-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.welcome-card {
+    flex: 1;
+    min-width: 250px;
+    background: var(--bg-light);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Style pour les vraies images des blocs de bienvenue */
+.welcome-img {
+    width: 100%; /* L'image prend toute la largeur de la carte */
+    height: 200px; /* Tu peux ajuster cette hauteur selon tes goûts */
+    object-fit: cover; /* C'est la ligne magique : elle recadre l'image sans la déformer */
+    display: block; /* Retire le petit espace vide qui s'ajoute parfois sous les images */
+}
+
+.welcome-card p {
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+/* === BANNIERE VERTE === */
+.green-banner {
+    background-color: var(--logo-green);
+    color: #ffffff;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.banner-content h2 {
+    margin-bottom: 15px;
+}
+
+/* === SERVICES (4 BLOCS) === */
+.services-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: var(--bg-light);
+}
+
+.services-section h2 {
+    color: var(--logo-green);
+}
+
+.section-subtitle {
+    margin-bottom: 50px;
+    color: #666;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Grille 2x2 */
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--logo-orange); /* Couleur orange demandée */
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    color: var(--logo-green);
+    transition: color 0.3s ease;
+}
+
+/* EFFET AU SURVOL DU BLOC SERVICE */
+.service-card:hover {
+    background-color: var(--logo-green);
+    transform: translateY(-5px); /* Petit effet de soulèvement */
+}
+
+.service-card:hover h3, 
+.service-card:hover p {
+    color: #ffffff; /* Le texte devient blanc pour être lisible sur le vert */
+}
+
+/* Le fond devient vert, mais l'icône reste orange comme demandé */
+.service-card:hover .service-icon {
+    color: var(--logo-orange); 
+}
+
+/* === FOOTER === */
+footer {
+    background-color: #111111;
+    color: #ffffff;
+    padding: 40px 20px; /* Un peu plus d'espace pour aérer */
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column; /* Force les éléments à se mettre l'un en dessous de l'autre */
+    align-items: center; /* Centre les éléments horizontalement */
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px; /* L'espace entre le texte du copyright et les icônes */
+}
+
+.social-links {
+    display: flex;
+    gap: 20px; /* Espacement régulier entre chaque icône */
+}
+
+.social-links a {
+    color: #ffffff;
+    font-size: 1.5rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--logo-orange); /* Les icônes s'allument en orange au survol */
+    transform: translateY(-3px); /* Petit effet de soulèvement sympa au survol */
+}
+
+/* === RESPONSIVE POUR MOBILES === */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr; /* 1 colonne sur téléphone */
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .nav-links {
+        display: none; /* À remplacer par un menu hamburger plus tard si besoin */
+    }
+    .footer-content {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   STYLES SPECIFIQUES AUX PAGES INTERNES 
+   ========================================= */
+/* --- Structure commune des en-têtes --- */
+.page-header {
+    margin-top: 70px;
+    color: #ffffff;
+    text-align: center;
+    padding: 90px 20px; 
+    background-position: center center !important; /* Centre l'image */
+    background-repeat: no-repeat !important;
+}
+
+/* --- Page SERVICES --- */
+.bg-services {
+    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-services.jpeg');
+    /* Modifie ce pourcentage pour ajuster la taille de cette image */
+    background-size: 130% !important; 
+}
+
+/* --- Page À PROPOS (La photo des agentes) --- */
+.bg-apropos {
+    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-appropos.jpeg');
+    /* Comme cette image est verticale, un zoom autour de 115% ou 120% devrait être idéal */
+    background-size: 120% !important;
+    /* On peut aussi caler l'image vers le haut pour bien voir les visages */
+    background-position: center top !important; 
+}
+
+/* --- Page CONTACT (La dame avec le casque) --- */
+.bg-contact {
+    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-contact.jpeg');
+    /* Cette image étant déjà bien horizontale, ajuste-la à ta guise */
+    background-size: 135% !important; 
+}
+
+/* Section contenant la grille */
+.services-detail-section {
+    padding: 80px 20px;
+    background-color: var(--bg-light);
+}
+
+/* Nouveaux blocs agrandis pour la page Services */
+.service-detail-card {
+    background-color: #ffffff;
+    padding: 50px 30px; /* Un padding plus généreux */
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    min-height: 450px; /* C'est ici que l'on force le bloc à être plus grand */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.service-detail-card h3 {
+    margin-bottom: 20px;
+    color: var(--logo-green);
+    transition: color 0.3s ease;
+}
+
+.service-detail-card p {
+    margin-bottom: 25px;
+    flex-grow: 1; /* Permet au texte de prendre l'espace disponible */
+}
+
+/* Liste à puces dans les blocs */
+.service-list {
+    text-align: left;
+    width: 100%;
+    list-style-type: none;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Petite ligne de séparation */
+    transition: border-color 0.3s ease;
+}
+
+.service-list li {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.service-list li::before {
+    content: '✓'; /* Ajoute une petite encoche devant chaque élément */
+    color: var(--logo-orange);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Effets au survol (identiques à l'index mais adaptés aux nouveaux éléments) */
+.service-detail-card:hover {
+    background-color: var(--logo-green);
+    transform: translateY(-5px);
+}
+
+.service-detail-card:hover h3, 
+.service-detail-card:hover p,
+.service-detail-card:hover .service-list li {
+    color: #ffffff;
+}
+
+.service-detail-card:hover .service-icon {
+    color: var(--logo-orange);
+}
+
+.service-detail-card:hover .service-list {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   STYLES SPECIFIQUES - PAGE A PROPOS
+   ========================================= */
+
+/* Section Principale À Propos */
+.about-main-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-text {
+    flex: 1; /* Prend la moitié de l'espace */
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.about-image-box {
+    flex: 1; /* Prend l'autre moitié de l'espace */
+}
+
+.about-img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* Section Nos Valeurs */
+.values-section {
+    padding: 80px 20px;
+    background-color: var(--bg-light);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes pour les 3 valeurs */
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-radius: 8px;
+    text-align: center;
+    border-bottom: 4px solid var(--logo-orange); /* Une petite ligne orange en bas pour le style */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    color: var(--logo-green); /* Ici on met l'icône en vert */
+    margin-bottom: 15px;
+}
+
+.value-card h3 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+/* Responsive pour la page À propos (pour les téléphones) */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column; /* Le texte passe au-dessus de l'image sur petit écran */
+        text-align: center;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr; /* Les blocs de valeurs passent sur 1 seule colonne */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   STYLES SPECIFIQUES - PAGE CONTACT
+   ========================================= */
+
+.contact-main-section {
+    padding: 80px 20px;
+    background-color: var(--bg-light);
+    text-align: center;
+}
+
+/* Zone WhatsApp */
+.whatsapp-container {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.whatsapp-container h2 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.whatsapp-container p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #25D366; /* La couleur officielle de WhatsApp */
+    color: #ffffff;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe57;
+    transform: translateY(-3px);
+}
+
+/* Cartes de Direction */
+.team-contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.team-card {
+    background-color: #ffffff;
+    flex: 1;
+    min-width: 300px;
+    padding: 40px 30px;
+    border-radius: 10px;
+    border-top: 5px solid var(--logo-green); /* Ligne verte en haut de la carte */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--bg-light);
+    color: var(--logo-orange);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 0 auto 20px auto;
+}
+
+.team-card h3 {
+    color: var(--logo-green);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.team-role {
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.team-contact-info p {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+}
+
+.team-contact-info i {
+    color: var(--logo-orange);
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Responsive pour les téléphones */
+@media (max-width: 768px) {
+    .team-contact-grid {
+        flex-direction: column;
+    }
+}
