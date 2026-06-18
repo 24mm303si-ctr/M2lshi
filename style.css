@@ -18,7 +18,12 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
 }
-
+body {
+    background-color: #ffffff !important; /* Force le fond blanc */
+    color: #2b2b2b !important;            /* Force le texte en gris très foncé/noir */
+    margin: 0;
+    font-family: 'Poppins', sans-serif;   /* Ou ta police actuelle */
+}
 /* === NAVIGATION FIXE === */
 #navbar {
     position: fixed;
@@ -83,6 +88,153 @@ body {
 .btn-contact-nav:hover {
     background-color: #07470b;
 }
+
+
+
+
+
+/* ========================================================
+   NAVIGATION : STYLE PAR DÉFAUT (POUR SMARTPHONE / MOBILE)
+   ======================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 45px; /* Aligne proprement ton logo */
+    width: auto;
+}
+
+/* Cache la case à cocher */
+.menu-toggle {
+    display: none;
+}
+
+/* Dessin des 3 barres du menu burger */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #0A5C10; /* Le vert M2 */
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Menu mobile : Il se superpose sous la barre sous forme de colonne caché par défaut */
+.navbar {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    display: none; /* CACHÉ SUR MOBILE */
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2b2b2b;
+    font-weight: 600;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #0A5C10;
+}
+
+/* Le bouton vert spécial de contact s'adapte sur mobile */
+.btn-contact {
+    background-color: #0A5C10;
+    color: #ffffff !important;
+    border-radius: 5px;
+    width: 85% !important;
+    margin-top: 10px;
+}
+
+/* CLIC BURGER : Quand la checkbox est cochée, on affiche le menu navbar */
+.menu-toggle:checked ~ .navbar {
+    display: flex;
+}
+
+/* Animation des barres qui se transforment en "X" quand on ouvre le menu */
+.menu-toggle:checked ~ .hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle:checked ~ .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle:checked ~ .hamburger span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+/* ========================================================
+   RESPONSIVE : ADAPTATION POUR ORDINATEUR (ÉCRANS LARGES)
+   ======================================================== */
+@media (min-width: 768px) {
+    /* Sur ordinateur, on supprime le bouton burger */
+    .hamburger {
+        display: none;
+    }
+
+    /* La navbar redevient une ligne horizontale classique au lieu d'une colonne cachée */
+    .navbar {
+        position: static;
+        display: flex !important; /* Reste visible en permanence */
+        flex-direction: row;
+        width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .nav-link {
+        width: auto;
+        padding: 0 15px;
+    }
+
+    /* Le bouton vert reprend sa forme initiale de bouton d'en-tête */
+    .btn-contact {
+        width: auto !important;
+        padding: 10px 25px;
+        margin-top: 0;
+        margin-left: 15px;
+    }
+}
+
+
+
+
+
+
+
 
 /* === SECTION HEROS === */
 .hero {
