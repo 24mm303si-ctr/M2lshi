@@ -1,100 +1,50 @@
-/* Variables pour respecter les couleurs du logo */
+/* ========================================================
+   1. VARIABLES & CONFIGURATION GLOBALE
+   ======================================================== */
 :root {
-    --logo-green: #0A5C10; /* Le vert profond du logo */
-    --logo-orange: #F29F05; /* Le jaune-orange du logo */
-    --text-dark: #333333;
-    --bg-light: #f9f9f9;
+    --primary-green: #0A5C10;
+    --primary-orange: #ff7b00;
+    --text-dark: #2b2b2b;
+    --text-light: #ffffff;
+    
+    /* Variables Glassmorphism renforcées */
+    --glass-bg: rgba(255, 255, 255, 0.25); /* Plus transparent */
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    --glass-blur: blur(16px); /* Flou plus prononcé */
 }
 
-* {
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
-}
-
-body {
     color: var(--text-dark);
-    line-height: 1.6;
+    color-scheme: light !important;
+    
+    /* === L'ARRIÈRE-PLAN "AURA" AUX COULEURS DE M2 LSHI MARKET === */
+    background-color: #eef5ef; /* Un blanc très légèrement teinté de vert pour la lisibilité */
+    background-image: 
+        /* Halo vert principal en haut à gauche */
+        radial-gradient(circle at 0% 0%, rgba(10, 92, 16, 0.4) 0, transparent 50%),
+        /* Halo orange discret en haut à droite */
+        radial-gradient(circle at 100% 0%, rgba(255, 123, 0, 0.15) 0, transparent 50%),
+        /* Halo vert en bas à droite */
+        radial-gradient(circle at 100% 100%, rgba(10, 92, 16, 0.3) 0, transparent 50%),
+        /* Petit halo vert en bas à gauche */
+        radial-gradient(circle at 0% 100%, rgba(10, 92, 16, 0.2) 0, transparent 40%);
+    
+    /* L'arrière-plan reste fixe pendant qu'on défile */
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-body {
-    background-color: #ffffff !important; /* Force le fond blanc */
-    color: #2b2b2b !important;            /* Force le texte en gris très foncé/noir */
-    margin: 0;
-    font-family: 'Poppins', sans-serif;   /* Ou ta police actuelle */
+*, *::before, *::after {
+    box-sizing: inherit;
 }
-/* === NAVIGATION FIXE === */
-#navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px 20px;
-}
-
-.logo img {
-    height: 50px; /* Ajuste la taille selon ton image */
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 600;
-    position: relative;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--logo-green);
-}
-
-.nav-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--logo-green);
-}
-
-.btn-contact-nav {
-    background-color: var(--logo-green);
-    color: #ffffff;
-    padding: 10px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-
-.btn-contact-nav:hover {
-    background-color: #07470b;
-}
-
-
-
-
 
 /* ========================================================
-   NAVIGATION : STYLE PAR DÉFAUT (POUR SMARTPHONE / MOBILE)
+   2. NAVIGATION
    ======================================================== */
 .header {
     position: fixed;
@@ -102,27 +52,22 @@ body {
     left: 0;
     width: 100%;
     height: 70px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    box-sizing: border-box;
-    z-index: 1000;
+    
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
 }
 
-.logo img {
-    height: 45px; /* Aligne proprement ton logo */
-    width: auto;
-}
+.logo img { height: 45px; width: auto; }
+.menu-toggle { display: none; }
 
-/* Cache la case à cocher */
-.menu-toggle {
-    display: none;
-}
-
-/* Dessin des 3 barres du menu burger */
 .hamburger {
     display: flex;
     flex-direction: column;
@@ -136,336 +81,246 @@ body {
     display: block;
     height: 3px;
     width: 100%;
-    background-color: #0A5C10; /* Le vert M2 */
+    background-color: var(--primary-green);
     border-radius: 3px;
     transition: all 0.3s ease;
 }
 
-/* Menu mobile : Il se superpose sous la barre sous forme de colonne caché par défaut */
 .navbar {
     position: absolute;
     top: 70px;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
-    display: none; /* CACHÉ SUR MOBILE */
+    display: none; 
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
 }
 
 .nav-link {
     text-decoration: none;
-    color: #2b2b2b;
+    color: var(--text-dark);
     font-weight: 600;
     padding: 15px 0;
     width: 100%;
     text-align: center;
-    transition: 0.3s;
+    transition: color 0.3s;
 }
 
-.nav-link:hover {
-    color: #0A5C10;
-}
+.nav-link:hover { color: var(--primary-green); }
 
-/* Le bouton vert spécial de contact s'adapte sur mobile */
 .btn-contact {
-    background-color: #0A5C10;
-    color: #ffffff !important;
-    border-radius: 5px;
+    background-color: var(--primary-green);
+    color: var(--text-light) !important;
+    border-radius: 8px;
     width: 85% !important;
     margin-top: 10px;
 }
 
-/* CLIC BURGER : Quand la checkbox est cochée, on affiche le menu navbar */
-.menu-toggle:checked ~ .navbar {
-    display: flex;
-}
+.menu-toggle:checked ~ .navbar { display: flex; }
+.menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+.menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-/* Animation des barres qui se transforment en "X" quand on ouvre le menu */
-.menu-toggle:checked ~ .hamburger span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-.menu-toggle:checked ~ .hamburger span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle:checked ~ .hamburger span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-}
-
-
-/* ========================================================
-   RESPONSIVE : ADAPTATION POUR ORDINATEUR (ÉCRANS LARGES)
-   ======================================================== */
 @media (min-width: 768px) {
-    /* Sur ordinateur, on supprime le bouton burger */
-    .hamburger {
-        display: none;
-    }
-
-    /* La navbar redevient une ligne horizontale classique au lieu d'une colonne cachée */
+    .hamburger { display: none; }
     .navbar {
         position: static;
-        display: flex !important; /* Reste visible en permanence */
+        display: flex !important;
         flex-direction: row;
         width: auto;
-        background-color: transparent;
+        background: transparent;
         box-shadow: none;
+        backdrop-filter: none;
+        border: none;
         padding: 0;
     }
-
-    .nav-link {
-        width: auto;
-        padding: 0 15px;
-    }
-
-    /* Le bouton vert reprend sa forme initiale de bouton d'en-tête */
+    .nav-link { width: auto; padding: 0 15px; }
     .btn-contact {
         width: auto !important;
         padding: 10px 25px;
         margin-top: 0;
         margin-left: 15px;
+        transition: transform 0.3s;
     }
+    .btn-contact:hover { transform: scale(1.05); }
 }
 
-
-
-
-
-
-
-
-/* === SECTION HEROS === */
+/* ========================================================
+   3. SECTION HERO (ACCUEIL)
+   ======================================================== */
 .hero {
-    margin-top: 70px; /* Pour compenser la barre fixe */
-    min-height: 90vh;
-    /* Le dégradé part du bas (vert opacity 90%) vers le haut (transparent) + ton image de fond */
-    background: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.1) 100%), url('images/imde1.jpeg');
+    margin-top: 70px;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/imde1.jpeg');
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #ffffff;
-    padding: 20px;
 }
 
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+
+/* Petite animation de flottement (optionnelle mais très pro) */
+@keyframes floatImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.hero-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--glass-shadow);
+    padding: 50px 30px;
+    border-radius: 20px;
+    max-width: 800px;
+    color: var(--text-light);
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
+.hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
+.hero p { font-size: 1.2rem; margin-bottom: 30px; }
 
-.btn {
+.hero-buttons .btn {
+    display: inline-block;
     padding: 12px 30px;
-    border-radius: 5px;
+    margin: 10px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
-.btn-filled {
-    background-color: var(--logo-green);
-    color: white;
-}
+.btn-filled { background-color: var(--primary-green); color: var(--text-light); }
+.btn-outline { background-color: transparent; color: var(--text-light); border: 2px solid var(--text-light); backdrop-filter: blur(5px); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-.btn-filled:hover {
-    background-color:var(--logo-orange);
-}
-
-.btn-outline {
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-}
-
-.btn-outline:hover {
-    background-color: #ffffff;
-    color: var(--logo-green);
-}
-
-/* === BIENVENUE === */
+/* ========================================================
+   4. SECTION BIENVENUE
+   ======================================================== */
 .welcome-section {
     padding: 80px 20px;
     text-align: center;
-    background-color: #ffffff;
-}
-
-.welcome-section h2 {
-    margin-bottom: 40px;
-    color: var(--logo-green);
-}
-
-.welcome-grid {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap;
+}
+
+.welcome-section h2 { color: var(--primary-green); font-size: 2rem; margin-bottom: 50px; }
+
+.welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .welcome-card {
-    flex: 1;
-    min-width: 250px;
-    background: var(--bg-light);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Style pour les vraies images des blocs de bienvenue */
-.welcome-img {
-    width: 100%; /* L'image prend toute la largeur de la carte */
-    height: 200px; /* Tu peux ajuster cette hauteur selon tes goûts */
-    object-fit: cover; /* C'est la ligne magique : elle recadre l'image sans la déformer */
-    display: block; /* Retire le petit espace vide qui s'ajoute parfois sous les images */
-}
-
-.welcome-card p {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
     padding: 20px;
-    font-size: 0.9rem;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-/* === BANNIERE VERTE === */
+.welcome-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.welcome-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* ========================================================
+   5. BANNIÈRE VERTE
+   ======================================================== */
 .green-banner {
-    background-color: var(--logo-green);
-    color: #ffffff;
+    background: rgba(10, 92, 16, 0.7); /* Verre teinté vert */
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-light);
     text-align: center;
     padding: 60px 20px;
+    margin: 40px 0;
+    box-shadow: var(--glass-shadow);
 }
 
-.banner-content h2 {
-    margin-bottom: 15px;
-}
+.banner-content { max-width: 800px; margin: 0 auto; }
+.banner-content h2 { font-size: 2rem; margin-bottom: 15px; }
 
-/* === SERVICES (4 BLOCS) === */
+/* ========================================================
+   6. SECTION SERVICES
+   ======================================================== */
 .services-section {
     padding: 80px 20px;
     text-align: center;
-    background-color: var(--bg-light);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.services-section h2 {
-    color: var(--logo-green);
-}
-
-.section-subtitle {
-    margin-bottom: 50px;
-    color: #666;
-}
+.services-section h2 { color: var(--primary-green); font-size: 2.2rem; margin-bottom: 10px; }
+.section-subtitle { margin-bottom: 50px; color: #555; }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Grille 2x2 */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    max-width: 900px;
-    margin: 0 auto;
 }
 
 .service-card {
-    background-color: #ffffff;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
     padding: 40px 20px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
-    cursor: pointer;
 }
 
-.service-icon {
-    font-size: 3rem;
-    color: var(--logo-orange); /* Couleur orange demandée */
-    margin-bottom: 20px;
-    transition: color 0.3s ease;
-}
-
-.service-card h3 {
-    margin-bottom: 15px;
-    color: var(--logo-green);
-    transition: color 0.3s ease;
-}
-
-/* EFFET AU SURVOL DU BLOC SERVICE */
 .service-card:hover {
-    background-color: var(--logo-green);
-    transform: translateY(-5px); /* Petit effet de soulèvement */
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.4);
 }
 
-.service-card:hover h3, 
-.service-card:hover p {
-    color: #ffffff; /* Le texte devient blanc pour être lisible sur le vert */
-}
+.service-icon { font-size: 3rem; color: var(--primary-orange); margin-bottom: 20px; }
+.service-card h3 { color: var(--primary-green); margin-bottom: 15px; }
 
-/* Le fond devient vert, mais l'icône reste orange comme demandé */
-.service-card:hover .service-icon {
-    color: var(--logo-orange); 
-}
-
-/* === FOOTER === */
+/* ========================================================
+   7. FOOTER
+   ======================================================== */
 footer {
-    background-color: #111111;
-    color: #ffffff;
-    padding: 40px 20px; /* Un peu plus d'espace pour aérer */
+    background: rgba(10, 92, 16, 0.85); /* Verre foncé */
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    color: var(--text-light);
     text-align: center;
+    padding: 40px 20px;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
-.footer-content {
-    display: flex;
-    flex-direction: column; /* Force les éléments à se mettre l'un en dessous de l'autre */
-    align-items: center; /* Centre les éléments horizontalement */
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px; /* L'espace entre le texte du copyright et les icônes */
-}
-
-.social-links {
-    display: flex;
-    gap: 20px; /* Espacement régulier entre chaque icône */
-}
-
-.social-links a {
-    color: #ffffff;
-    font-size: 1.5rem;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.social-links a:hover {
-    color: var(--logo-orange); /* Les icônes s'allument en orange au survol */
-    transform: translateY(-3px); /* Petit effet de soulèvement sympa au survol */
-}
-
-/* === RESPONSIVE POUR MOBILES === */
-@media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr; /* 1 colonne sur téléphone */
-    }
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    .nav-links {
-        display: none; /* À remplacer par un menu hamburger plus tard si besoin */
-    }
-    .footer-content {
-        flex-direction: column;
-    }
-}
+.social-links { margin-top: 20px; }
+.social-links a { color: var(--text-light); font-size: 1.5rem; margin: 0 10px; transition: color 0.3s; }
+.social-links a:hover { color: var(--primary-orange); }
 
 
 
@@ -483,121 +338,100 @@ footer {
 
 
 
-
-
-
-
-
-
-
-/* =========================================
-   STYLES SPECIFIQUES AUX PAGES INTERNES 
-   ========================================= */
-/* --- Structure commune des en-têtes --- */
+/* ========================================================
+   8. PAGE SERVICES (DÉTAILS)
+   ======================================================== */
 .page-header {
-    margin-top: 70px;
-    color: #ffffff;
+    margin-top: 70px; /* Pour éviter que le menu fixe ne cache le texte */
+    padding: 80px 20px;
     text-align: center;
-    padding: 90px 20px; 
-    background-position: center center !important; /* Centre l'image */
-    background-repeat: no-repeat !important;
+    
+    /* Effet Verre Teinté Vert pour l'en-tête */
+    background: rgba(10, 92, 16, 0.7); 
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--glass-shadow);
 }
 
-/* --- Page SERVICES --- */
-.bg-services {
-    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-services.jpeg');
-    /* Modifie ce pourcentage pour ajuster la taille de cette image */
-    background-size: 130% !important; 
+.page-header h1 {
+    margin: 0 0 15px 0;
+    font-size: 2.5rem;
 }
 
-/* --- Page À PROPOS (La photo des agentes) --- */
-.bg-apropos {
-    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-appropos.jpeg');
-    /* Comme cette image est verticale, un zoom autour de 115% ou 120% devrait être idéal */
-    background-size: 120% !important;
-    /* On peut aussi caler l'image vers le haut pour bien voir les visages */
-    background-position: center top !important; 
+.page-header p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
 }
 
-/* --- Page CONTACT (La dame avec le casque) --- */
-.bg-contact {
-    background-image: linear-gradient(to top, rgba(10, 92, 16, 0.9) 0%, rgba(10, 92, 16, 0.2) 100%), url('images/image-contact.jpeg');
-    /* Cette image étant déjà bien horizontale, ajuste-la à ta guise */
-    background-size: 135% !important; 
-}
-
-/* Section contenant la grille */
 .services-detail-section {
     padding: 80px 20px;
-    background-color: var(--bg-light);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Nouveaux blocs agrandis pour la page Services */
+/* Cartes détaillées en verre */
 .service-detail-card {
-    background-color: #ffffff;
-    padding: 50px 30px; /* Un padding plus généreux */
-    border-radius: 10px;
-    border: 1px solid #eee;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    padding: 40px 30px;
     transition: all 0.3s ease;
-    min-height: 450px; /* C'est ici que l'on force le bloc à être plus grand */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.service-detail-card h3 {
-    margin-bottom: 20px;
-    color: var(--logo-green);
-    transition: color 0.3s ease;
+.service-detail-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .service-detail-card p {
+    line-height: 1.6;
     margin-bottom: 25px;
-    flex-grow: 1; /* Permet au texte de prendre l'espace disponible */
+    color: #444; /* Un peu plus foncé pour la lisibilité */
 }
 
-/* Liste à puces dans les blocs */
+/* Style des listes à puces à l'intérieur des cartes */
 .service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     text-align: left;
     width: 100%;
-    list-style-type: none;
-    padding-top: 20px;
-    border-top: 1px solid #eee; /* Petite ligne de séparation */
-    transition: border-color 0.3s ease;
 }
 
 .service-list li {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    padding: 12px 0 12px 35px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+/* Ajout d'une icône de validation orange devant chaque puce */
 .service-list li::before {
-    content: '✓'; /* Ajoute une petite encoche devant chaque élément */
-    color: var(--logo-orange);
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-/* Effets au survol (identiques à l'index mais adaptés aux nouveaux éléments) */
-.service-detail-card:hover {
-    background-color: var(--logo-green);
-    transform: translateY(-5px);
-}
-
-.service-detail-card:hover h3, 
-.service-detail-card:hover p,
-.service-detail-card:hover .service-list li {
-    color: #ffffff;
-}
-
-.service-detail-card:hover .service-icon {
-    color: var(--logo-orange);
-}
-
-.service-detail-card:hover .service-list {
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    content: '\f058'; /* Code de l'icône "Check Circle" de FontAwesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--primary-orange);
+    position: absolute;
+    left: 0;
+    top: 13px;
+    font-size: 1.2rem;
 }
 
 
@@ -620,88 +454,129 @@ footer {
 
 
 
-/* =========================================
-   STYLES SPECIFIQUES - PAGE A PROPOS
-   ========================================= */
 
-/* Section Principale À Propos */
+
+
+/* ========================================================
+   9. PAGE À PROPOS
+   ======================================================== */
+
+/* Section Notre Histoire */
 .about-main-section {
     padding: 80px 20px;
-    background-color: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .about-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 50px;
-    max-width: 1100px;
-    margin: 0 auto;
+    gap: 40px;
+    /* Transformation de la boîte principale en grande carte de verre */
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    padding: 40px;
 }
 
 .about-text {
-    flex: 1; /* Prend la moitié de l'espace */
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text h2 {
+    color: var(--primary-green) !important; /* Remplacement de la couleur en ligne du HTML */
+    font-size: 2.2rem;
+    margin-bottom: 20px;
 }
 
 .about-text p {
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 20px;
 }
 
 .about-image-box {
-    flex: 1; /* Prend l'autre moitié de l'espace */
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
 }
 
 .about-img {
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    display: block;
+    max-width: 500px;
+    border-radius: 15px;
+    /* Une petite ombre autour de l'image pour la détacher du fond en verre */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Section Nos Valeurs */
 .values-section {
-    padding: 80px 20px;
-    background-color: var(--bg-light);
+    padding: 60px 20px 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.values-section h2 {
+    color: var(--primary-green) !important;
+    font-size: 2.2rem;
 }
 
 .values-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes pour les 3 valeurs */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
 .value-card {
-    background-color: #ffffff;
+    /* Style carte de verre */
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
     padding: 40px 20px;
-    border-radius: 8px;
     text-align: center;
-    border-bottom: 4px solid var(--logo-orange); /* Une petite ligne orange en bas pour le style */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .value-icon {
-    font-size: 2.5rem;
-    color: var(--logo-green); /* Ici on met l'icône en vert */
-    margin-bottom: 15px;
+    font-size: 3rem;
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+    /* Petit effet lumineux autour de l'icône */
+    filter: drop-shadow(0 4px 6px rgba(255, 123, 0, 0.2));
 }
 
 .value-card h3 {
+    color: var(--primary-green);
     margin-bottom: 15px;
-    color: var(--text-dark);
+    font-size: 1.4rem;
 }
 
-/* Responsive pour la page À propos (pour les téléphones) */
+.value-card p {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Ajustement responsive pour la section histoire */
 @media (max-width: 768px) {
     .about-container {
-        flex-direction: column; /* Le texte passe au-dessus de l'image sur petit écran */
+        flex-direction: column;
         text-align: center;
-    }
-    
-    .values-grid {
-        grid-template-columns: 1fr; /* Les blocs de valeurs passent sur 1 seule colonne */
+        padding: 30px 20px;
     }
 }
 
@@ -721,127 +596,246 @@ footer {
 
 
 
-/* =========================================
-   STYLES SPECIFIQUES - PAGE CONTACT
-   ========================================= */
+
+
+
+
+
+
+
+
+
+
+/* ========================================================
+   10. PAGE CONTACT
+   ======================================================== */
 
 .contact-main-section {
     padding: 80px 20px;
-    background-color: var(--bg-light);
-    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Espace entre le bloc WhatsApp et les cartes de la direction */
 }
 
-/* Zone WhatsApp */
+/* --- Conteneur Principal WhatsApp --- */
 .whatsapp-container {
-    max-width: 800px;
-    margin: 0 auto 60px auto;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    padding: 50px 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-container:hover {
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .whatsapp-container h2 {
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    color: var(--primary-green);
+    margin-bottom: 15px;
+    font-size: 2rem;
 }
 
 .whatsapp-container p {
-    color: #666;
     margin-bottom: 30px;
-}
-
-.btn-whatsapp {
-    display: inline-block;
-    background-color: #25D366; /* La couleur officielle de WhatsApp */
-    color: #ffffff;
-    padding: 15px 35px;
-    border-radius: 50px;
     font-size: 1.1rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    color: var(--text-dark);
 }
 
-.btn-whatsapp i {
-    margin-right: 10px;
-    font-size: 1.3rem;
+/* Bouton WhatsApp Spécifique */
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #25D366; /* Vert officiel de WhatsApp */
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
 }
 
 .btn-whatsapp:hover {
-    background-color: #1ebe57;
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
+    background-color: #1ebd5a;
+    color: #ffffff;
 }
 
-/* Cartes de Direction */
+.btn-whatsapp i {
+    font-size: 1.5rem;
+}
+
+/* --- Grille de l'équipe de Direction --- */
 .team-contact-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .team-card {
-    background-color: #ffffff;
-    flex: 1;
-    min-width: 300px;
-    padding: 40px 30px;
-    border-radius: 10px;
-    border-top: 5px solid var(--logo-green); /* Ligne verte en haut de la carte */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
     transition: transform 0.3s ease;
 }
 
 .team-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .team-icon {
     width: 80px;
     height: 80px;
-    background-color: var(--bg-light);
-    color: var(--logo-orange);
+    background: rgba(10, 92, 16, 0.1);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
     margin: 0 auto 20px auto;
+    color: var(--primary-orange);
+    font-size: 2.5rem;
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .team-card h3 {
-    color: var(--logo-green);
-    font-size: 1.4rem;
+    color: var(--primary-green);
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
 .team-role {
-    color: #888;
     font-weight: 600;
+    color: #666;
     margin-bottom: 25px;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .team-contact-info p {
-    margin-bottom: 10px;
+    margin: 12px 0;
     font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     color: var(--text-dark);
 }
 
+/* Icônes Téléphone et Email */
 .team-contact-info i {
-    color: var(--logo-orange);
-    margin-right: 10px;
-    width: 20px;
+    color: var(--primary-orange);
+    font-size: 1.2rem;
 }
 
-/* Responsive pour les téléphones */
-@media (max-width: 768px) {
-    .team-contact-grid {
-        flex-direction: column;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Ligne sous la page active --- */
+.nav-link.active {
+    color: var(--primary-orange);
+}
+
+@media (min-width: 768px) {
+    .nav-link {
+        position: relative;
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 3px;
+        background-color: var(--primary-orange);
+        border-radius: 2px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================
+   11. ANIMATION AU DÉFILEMENT (SCROLL REVEAL)
+   ======================================================== */
+
+/* État initial : l'élément est invisible et légèrement descendu */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* État final : l'élément devient visible et remonte à sa place */
+.scroll-reveal.is-visible { /* <-- C'est ici que ça change */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
